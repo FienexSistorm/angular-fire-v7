@@ -6,6 +6,10 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -20,5 +24,13 @@ export const appConfig: ApplicationConfig = {
       measurementId: "G-FDPEHSQ755"
     })),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())]
+    provideFirestore(() => getFirestore()),
+    provideAnimationsAsync(),
+    providePrimeNG({
+        theme: {
+            preset: Aura
+        }
+    })
+
+  ]
 };

@@ -1,25 +1,29 @@
-import { Component, inject, model } from '@angular/core';
-import { Auth, User, user } from '@angular/fire/auth';
+import { Component } from '@angular/core';
 import { AuthenticationService } from '../../Services/authentication.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { ButtonModule } from 'primeng/button';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-logi',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputTextModule,RouterModule, FloatLabelModule, ButtonModule],
   templateUrl: './logi.component.html',
   styleUrl: './logi.component.scss'
 })
 export class LogiComponent {
-  username = model('');
-  password = model('');
-  constructor(private authService: AuthenticationService) { }
+  loginForm = new UntypedFormGroup({
+    username: new UntypedFormControl(''),
+    password: new UntypedFormControl(''),
+  })
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   login() {
     // Implement login logic here
-    console.log('Login clicked', this.username(), this.password());
-    this.authService.loginWithCredentials(this.username(), this.password()).subscribe({
+    this.authService.loginWithCredentials(this.loginForm.value.username, this.loginForm.value.password).subscribe({
       next: (res) => {
-        console.log('Login successful', res);
+        this.router.navigate(['/admin']);
       },
       error: (err) => {
         console.error('Login failed', err);
