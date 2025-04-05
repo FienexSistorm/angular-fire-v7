@@ -1,0 +1,11 @@
+<div class="login">
+  <label for="username">Username</label>
+  <input type="text" id="username" [(ngModel)]="username" placeholder="Enter your username" required>
+</div>
+<div class="login">
+  <label for="password">password</label>
+  <input type="text" id="password" [(ngModel)]="password" placeholder="Enter your password" required>
+</div>
+<div class="action">
+  <button type="button" (click)="login()">Submit</button>
+</div>
