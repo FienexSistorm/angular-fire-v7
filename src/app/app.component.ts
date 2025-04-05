@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { LogiComponent } from './Components/logi/logi.component';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [ LogiComponent, RouterModule],
+  imports: [ RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
